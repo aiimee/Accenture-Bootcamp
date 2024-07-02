@@ -26,7 +26,7 @@ const openai = new OpenAI(configuration)
 const pinecone = new PineconeClient({ apiKey: process.env.PINECONE_API_KEY })
 const pineconeIndex = pinecone.Index(process.env.PINECONE_INDEX)
 
-// Set up LangChain with correct import
+// Set up langchain
 const langChain = new ChatOpenAI({
   openai,
   pinecone: pineconeIndex

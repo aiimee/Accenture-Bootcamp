@@ -1,0 +1,101 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.feedback-container {
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.feedback-container h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.feedback-container p {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.stars {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.star {
+    text-align: center;
+}
+
+.star img {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.star img:hover {
+    transform: scale(1.1); /* Enlarge on hover for visual feedback */
+}
+
+.star p {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.star.selected-poor img {
+    filter: brightness(1) saturate(100%) invert(16%) sepia(89%) saturate(7478%) hue-rotate(356deg) brightness(106%) contrast(101%);
+}
+
+
+.star.selected-average img {
+    filter: brightness(1) saturate(100%) invert(55%) sepia(23%) saturate(4008%) hue-rotate(0) brightness(105%) contrast(100%);
+    /* Setting color and opacity */
+    /*color: yellow; /* Change color to yellow */
+   /* opacity: 0.7; /* Adjust opacity as needed */
+}
+
+.star.selected-excellent img {
+    filter: brightness(1) saturate(100%) invert(55%) sepia(23%) saturate(4008%) hue-rotate(75deg) brightness(105%) contrast(105%);
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #2a2a2a;
+    color: white;
+    font-size: 14px;
+    resize: none;
+}
+
+button#submitFeedback {
+    width: 100%;
+    padding: 10px;
+    background-color: #b648ce; /* Purple color */
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button#submitFeedback:hover {
+    background-color: #8e36a8; /* Darker purple on hover */
+}

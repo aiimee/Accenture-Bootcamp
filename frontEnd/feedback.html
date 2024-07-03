@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="assets/feedbackStyle.css">
+    <title>Share Your Feedback</title>
+</head>
+<body>
+    <div class="feedback-container">
+        <h1>Share your feedback</h1>
+        <p>Please let us know your thoughts. Your feedback is valuable for us to improve your experience!</p>
+        <div class="stars">
+            <div class="star" data-rating="poor">
+                <img src="assets/Starpoor.png" alt="Poor">
+                <p>Poor</p>
+            </div>
+            <div class="star" data-rating="average">
+                <img src="assets/StarAverage.png" alt="Average">
+                <p>Average</p>
+            </div>
+            <div class="star" data-rating="excellent">
+                <img src="assets/StarExcellent.png" alt="Excellent">
+                <p>Excellent</p>
+            </div>
+        </div>
+        <textarea placeholder="Anything else you think or feel can improve"></textarea>
+        <button id="submitFeedback">Submit</button>
+    </div>
+    <script src="assets/jss/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const stars = document.querySelectorAll('.star img');
+        
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    stars.forEach(s => {
+                        s.parentNode.classList.remove('selected-poor', 'selected-average', 'selected-excellent');
+                    });
+        
+                    if (this.alt === 'Poor') {
+                        this.parentNode.classList.add('selected-poor');
+                    } else if (this.alt === 'Average') {
+                        this.parentNode.classList.add('selected-average');
+                    } else if (this.alt === 'Excellent') {
+                        this.parentNode.classList.add('selected-excellent');
+                    }
+                });
+            });
+        
+            const submitButton = document.getElementById('submitFeedback');
+            submitButton.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                window.location.href = 'submitted.html'; // Redirect to submitted.html
+            });
+        });
+        
+        
+    </script>
+</body>
+</html>

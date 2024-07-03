@@ -1,0 +1,116 @@
+body {
+    background-color: black;
+}
+
+/* CSS to style the top image container */
+.top-image-container {
+    position: absolute;
+    top: 10%; /* Adjust top position as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Style for the top image */
+.top-image-container img {
+    max-width: 100px; /* Adjust max width as needed */
+    height: auto;
+}
+
+/* Style for the top image */
+.top-image-container img {
+    max-width: 100px; /* Adjust max width as needed */
+    height: auto;
+}
+
+/* Style for the text below the top image */
+.top-text {
+    position: absolute;
+    top: calc(10% + 120px); /* Adjust based on the image size and position */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: rgb(255, 255, 255); /* Adjust color as needed */
+    font-size: 24px; /* Adjust font size as needed */
+    font-family: 'Arial', sans-serif; /* Change font style */
+    font-weight: bold; /* Adjust font weight as needed */
+}
+/* CSS to style the purple square */
+.purple-square {
+    width: 300px;
+    height: 300px;
+    background-color: rgb(182, 72, 206);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+     /* Ensure image doesn't overflow */
+}
+@media (max-width: 768px) {
+    .purple-square {
+        width: 250px; /* Adjust size for smaller screens */
+        height: 250px; /* Adjust size for smaller screens */
+    }}
+
+    /* Style the image inside the purple square */
+    .purple-square img {
+        max-width: 100%; /* Ensure image fits within the square */
+        max-height: 100%; /* Ensure image fits within the square */
+        object-fit: contain; /* Maintain aspect ratio and fit inside the container */
+    }
+/* Container for the image inside the purple square */
+.image-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style the image inside the purple square */
+.image-container img {
+    max-width: 120%;
+    max-height: 120%;
+    object-fit: contain;
+     /* Reduce height by 40px (20px top + 20px bottom)max-height: calc(100% - 40px); */
+}
+#bottom-text {
+    width: 100%;
+    text-align: center;
+    color: white;
+    margin-top: 20px; /* Adjust margin as needed */
+    font-size: 24px; /* Adjust font size as needed */
+    font-family: 'Arial', sans-serif; /* Change font style */
+    font-weight: bold; /* Adjust font weight as needed */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for better visibility */
+    position: absolute;
+    top: calc(50% + 180px); /* Position text below the purple square */
+    left: 50%;
+    transform: translateX(-50%);
+}
+/* Style for the text at the bottom of the purple square */
+/* Hide the default button styles */
+/* Hide the default button styles */
+button#bottom-text {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    font-size: 24px; /* Adjust font size as needed */
+    font-family: 'Arial', sans-serif; /* Change font style */
+    font-weight: bold; /* Adjust font weight as needed */
+    cursor: pointer;
+}
+
+/* Ensure only the text is visible */
+button#bottom-text {
+    color: #ffffff; /* Adjust text color as needed */
+    text-decoration: none; /* Add underline for better visibility */
+}
+
+/* Optional: Hover effect for text */
+button#bottom-text:hover {
+    text-decoration: none; /* Remove underline on hover if desired */
+}

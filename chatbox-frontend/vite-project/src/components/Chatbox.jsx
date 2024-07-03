@@ -1,5 +1,7 @@
+
 import React, { useState } from 'react'
 import axios from 'axios'
+import '../styles/chatbox.css'; 
 
 const Chatbox = () => {
   const [message, setMessage] = useState('')
@@ -47,38 +49,36 @@ const Chatbox = () => {
   }
 
   return (
-    <div>
-      <h1>Chatbox</h1>
-      <div>
+    <div className="chatbox-container">
+      <div className="chatbox-header">
+        <img src="src/styles/Message Bot.png" alt="Chatbox Logo" className="chatbox-logo" />
+      </div>
+      <div className="chatbox-messages">
         {responses.map((res, index) => (
-          <div key={index}>
-            <p><strong>You:</strong> {res.message}</p>
-            <p><strong>Bot:</strong> {res.response}</p>
+          <div
+            key={index}
+            className={`chatbox-message ${
+              res.response ? 'chatbox-message-bot' : 'chatbox-message-user'
+            }`}
+          >
+            <p><strong>{res.response ? 'Bot' : 'You'}:</strong> {res.message}</p>
+            {res.response && <p>{res.response}</p>}
           </div>
         ))}
       </div>
-      <input
-        type='text'
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        placeholder='Type a message'
-      />
-      <button onClick={sendMessage}>Send</button>
-      <input type='file' onChange={(e) => setFile(e.target.files[0])} />
-      <button onClick={uploadFile}>Upload Document</button>
-      <input
-        type='text'
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder='Query the document'
-      />
-      <button onClick={queryDocuments}>Query Documents</button>
-      <div>
-        <h3>Query Result:</h3>
-        <pre>{queryResult}</pre>
+      <div className="chatbox-input">
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Type a message"
+        />
+        <button onClick={sendMessage}>
+          <img src="src/styles/Email Send.png" alt="Send" />
+        </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Chatbox
+export default Chatbox;

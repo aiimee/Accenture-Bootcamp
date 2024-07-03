@@ -50,6 +50,11 @@ const splitText = async (text) => {
   return output.map(doc => doc.pageContent); // Extract the text content from each chunk
 };
 
+// Helper function to format Pinecone results
+const formatPineconeResults = (results) => {
+  return results.map((result, index) => `Result ${index + 1}: ${result.metadata.text}`).join('\n');
+};
+
 
 // Helper function to store text embeddings in Pinecone
 const storeInPinecone = async (text) => {
@@ -171,6 +176,7 @@ app.post('/test-upsert', async (req, res) => {
 // });
 
 // Endpoint to query Pinecone with plain text
+
 app.post('/query', async (req, res) => {
   const { query } = req.body;
   if (!query) {
@@ -192,11 +198,15 @@ app.post('/chat', async (req, res) => {
   const { message } = req.body;
 
   try {
-    // Get chatbot response
-    const chatResponse = await langChain.invoke(message);
-
-    // Query Pinecone for relevant documents
+    // Query pinecone for relevant documents
     const pineconeResults = await queryPinecone(message);
+    const formattedResults = formatPineconeResults(pineconeResults);
+
+    // Integrate pinecone results into the prompt
+    const prompt = `You have received a message from the user: "${message}". Use the following information retrieved from the database to help answer the query:\n${formattedResults}`;
+
+    // Get chatbot response
+    const chatResponse = await langChain.invoke(prompt);
 
     res.json({ 
       response: chatResponse,
@@ -208,13 +218,10 @@ app.post('/chat', async (req, res) => {
   }
 });
 
-
-
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-
-
-
+// https://docs.pinecone.io/guides/data/query-data
+// https://www.pinecone.io/learn/chatbots-with-pinecone/

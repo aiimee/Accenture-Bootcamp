@@ -26,7 +26,7 @@ const Chatbox = () => {
   const uploadFile = async () => {
     if (!file) return;
     const formData = new FormData();
-    formData.append("file", file); // match field name in backend
+    formData.append("file", file);
 
     try {
       const res = await axios.post("http://localhost:5000/upload", formData, {
@@ -84,6 +84,26 @@ const Chatbox = () => {
           <img src="src/styles/Email Send.png" alt="Send" />
         </button>
       </div>
+      <div className="chatbox-upload">
+        <input
+          type="file"
+          onChange={(e) => setFile(e.target.files[0])}
+        />
+        <button onClick={uploadFile}>
+          Upload Document
+        </button>
+      </div>
+      {/* <div className="chatbox-query">
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Query documents"
+        />
+        <button onClick={queryDocuments}>
+          Query
+        </button>
+      </div> */}
       <div>
         <Link to="/feedback">Click here to provide Feedback</Link>
       </div>

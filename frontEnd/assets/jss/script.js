@@ -29,8 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     continueButton.addEventListener('click', function() {
+       
         if (selectedServices.size > 0) {
-            window.location.href = 'feedback.html';
+            window.location.href = "http://localhost:5173/";
         }
     });
 });

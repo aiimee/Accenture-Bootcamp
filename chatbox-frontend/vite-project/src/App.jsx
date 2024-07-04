@@ -10,7 +10,7 @@ import Thanks from "./components/Thanks";
 function App() {
   return (
     <div classname="App">
-      <h1>Welcome to AI helper</h1>
+      <h1>Welcome to Access Point Accenture</h1>
       <image src={robot} alt="robot" />
       <Link to="/services">
         <img src={robot} alt="Trees" height="200" />

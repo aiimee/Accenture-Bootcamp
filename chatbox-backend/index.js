@@ -52,12 +52,15 @@ const splitText = async (text) => {
 
 // Helper function to format Pinecone results
 const formatPineconeResults = (results) => {
-  return results.map((result, index) => `Result ${index + 1}: ${result.metadata.text}`).join('\n');
+  return results.map((result, index) => `
+    [START_RESULT]
+    [BOLD]Result ${index + 1}:[/BOLD] ${result.metadata.text} (Source: ${result.metadata.fileName})
+    [END_RESULT]
+  `).join('\n');
 };
 
-
 // Helper function to store text embeddings in Pinecone
-const storeInPinecone = async (text) => {
+const storeInPinecone = async (text, fileName) => {
   try {
     // Split text into chunks
     const chunks = await splitText(text);
@@ -76,7 +79,7 @@ const storeInPinecone = async (text) => {
       vectors.push({
         id: `doc-${Date.now()}-${Math.random()}`,
         values: embedding,
-        metadata: { text: chunk },
+        metadata: { text: chunk, fileName: fileName }, // Include file name in metadata
       });
     }
 
@@ -121,7 +124,6 @@ const queryPinecone = async (query) => {
   }
 };
 
-
 // Upload document endpoint
 app.post('/upload', upload.single('file'), async (req, res) => {
   const file = req.file;
@@ -133,7 +135,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     const text = await processPDF(file.path);
 
     // Store text embeddings in Pinecone
-    await storeInPinecone(text);
+    await storeInPinecone(text, file.originalname);
 
     // Clean up uploaded file
     fs.unlinkSync(file.path);
@@ -203,7 +205,18 @@ app.post('/chat', async (req, res) => {
     const formattedResults = formatPineconeResults(pineconeResults);
 
     // Integrate pinecone results into the prompt
-    const prompt = `You have received a message from the user: "${message}". Use the following information retrieved from the database to help answer the query:\n${formattedResults}`;
+    const prompt = `
+      You have received a message from the user: "${message}". 
+      Use the following information retrieved from the database to help answer the query. 
+      Try to keep the answers related to Accenture Melbourne. 
+
+      At the end, add: "If you have any further queries, please contact 1 (571) 434-5003".
+
+      At the end add the source of the information and reformat the results to be user-friendly and readable. 
+      Here is the relevant information retrieved from the database:
+
+      ${formattedResults}
+    `.trim();
 
     // Get chatbot response
     const chatResponse = await langChain.invoke(prompt);

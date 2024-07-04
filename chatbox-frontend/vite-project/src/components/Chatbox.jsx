@@ -69,7 +69,7 @@ const Chatbox = () => {
           className="chatbox-logo"
         />
       </div>
-      <div className="chatbox-messages">
+      <div className="chatbox-messages" >
         {responses.map((res, index) => (
           <div
             key={index}
@@ -107,7 +107,7 @@ const Chatbox = () => {
           <img src="src/styles/Email Send.png" alt="Send" />
         </button>
       </div>
-      <div className="chatbox-upload">
+      {/* <div className="chatbox-upload">
         <input
           type="file"
           onChange={(e) => setFile(e.target.files[0])}
@@ -115,7 +115,7 @@ const Chatbox = () => {
         <button onClick={uploadFile}>
           Upload Document
         </button>
-      </div>
+      </div> */}
       <div>
         <Link to="/feedback">Click here to provide Feedback</Link>
       </div>

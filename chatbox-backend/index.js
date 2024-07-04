@@ -209,6 +209,7 @@ app.post('/chat', async (req, res) => {
       You have received a message from the user: "${message}". 
       Use the following information retrieved from the database to help answer the query. 
       Try to keep the answers related to Accenture Melbourne. 
+      Always include the link if any.
 
       At the end, add: "If you have any further queries, please contact 1 (571) 434-5003".
 
